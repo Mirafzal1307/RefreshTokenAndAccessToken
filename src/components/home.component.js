@@ -11,29 +11,17 @@ export default class Home extends Component {
     };
   }
 
-  componentDidMount() {
-    UserService.getPublicContent().then(
-      response => {
-        this.setState({
-          content: response.data
-        });
-      },
-      error => {
-        this.setState({
-          content:
-            (error.response && error.response.data) ||
-            error.message ||
-            error.toString()
-        });
-      }
-    );
-  }
+
 
   render() {
+    let mass = UserService.getPublicContent();
+    // console.log();
+    // let pr = new Promise(mass)
+    // pr.then(i => console.log(i))
     return (
       <div className="container">
         <header className="jumbotron">
-          <h3>{this.state.content}</h3>
+          <h3>Welcome to Home</h3>
         </header>
       </div>
     );

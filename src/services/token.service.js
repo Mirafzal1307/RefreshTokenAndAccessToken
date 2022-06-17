@@ -1,31 +1,33 @@
 class TokenService {
   getLocalRefreshToken() {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user?.refreshToken;
+    const admin = localStorage.getItem("refreshToken");
+    return admin;
   }
 
   getLocalAccessToken() {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user?.accessToken;
+    const admin = localStorage.getItem("accessToken");
+    return admin;
   }
 
   updateLocalAccessToken(token) {
-    let user = JSON.parse(localStorage.getItem("user"));
-    user.accessToken = token;
-    localStorage.setItem("user", JSON.stringify(user));
+    console.log(typeof token);
+    let admin = localStorage.getItem("accessToken");
+    admin = token;
+    localStorage.setItem("accessToken", admin);
   }
 
-  getUser() {
-    return JSON.parse(localStorage.getItem("user"));
+  getAdmin() {
+    return JSON.parse(localStorage.getItem("admin"));
   }
 
-  setUser(user) {
-    console.log(JSON.stringify(user));
-    localStorage.setItem("user", JSON.stringify(user));
+  setAdmin(admin) {
+    // console.log(JSON.stringify(admin));
+    localStorage.setItem("accessToken", admin.accessToken);
+    localStorage.setItem("refreshToken", admin.refreshToken);
   }
 
-  removeUser() {
-    localStorage.removeItem("user");
+  removeAdmin() {
+    localStorage.removeItem("admin");
   }
 }
 

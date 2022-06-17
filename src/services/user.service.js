@@ -1,20 +1,9 @@
 import api from './api';
 
+// console.log(api);
 class UserService {
-  getPublicContent() {
-    return api.get('/test/all');
-  }
-
-  getUserBoard() {
-    return api.get('/test/user');
-  }
-
-  getModeratorBoard() {
-    return api.get('/test/mod');
-  }
-
-  getAdminBoard() {
-    return api.get('/test/admin');
+  async getPublicContent() {
+    return await api.get('/character-property/admin/property');
   }
 }
 

@@ -4,13 +4,13 @@ import TokenService from "./token.service";
 class AuthService {
   login(username, password) {
     return api
-      .post("/auth/signin", {
+      .post("/security/login", {
         username,
         password
       })
       .then(response => {
         if (response.data.accessToken) {
-          TokenService.setUser(response.data);
+          TokenService.setAdmin(response.data);
         }
 
         return response.data;
@@ -18,19 +18,11 @@ class AuthService {
   }
 
   logout() {
-    TokenService.removeUser();
-  }
-
-  register(username, email, password) {
-    return api.post("/auth/signup", {
-      username,
-      email,
-      password
-    });
+    TokenService.removeAdmin();
   }
 
   getCurrentUser() {
-    return TokenService.getUser();
+    return TokenService.getAdmin();
   }
 }
 
