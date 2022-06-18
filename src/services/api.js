@@ -14,6 +14,7 @@ const request = axios.create({
 request.interceptors.request.use(
   (config) => {
     const token = TokenService.getLocalAccessToken();
+    console.log(token);
     if (token) {
       // console.log(token);
       // config.headers["Authorization"] = 'Bearer ' + token;  // for Spring Boot back-end
@@ -33,32 +34,11 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (res) => {
-    // console.log(res);
+    console.log(res);
     return res;
   },
   async (err) => {
-    // const originalConfig = err.config;
-    // const refresh_token = TokenService.getLocalRefreshToken();
-    // Access Token was expired
-    // if ( err.response.status === 403 && !originalConfig._retry) {
-    //   originalConfig._retry = true;
-    //   try {
-    //     const res = await request({
-    //       url: '/security/login/refresh' ,
-    //       method: 'post',
-    //       params: {
-    //         refresh_token : refresh_token
-    //       }
-    //     })
-    //     const { accessToken } = res.data;
-    //     TokenService.updateLocalAccessToken(accessToken);
-
-    //     return request(originalConfig);
-    //   } catch (_error) {
-    //     console.log(_error);
-    //     return Promise.reject(_error)
-    //   }
-    // } 
+console.log(err);
     checkErrorOne(err);
     checkErrorTwo(err);
     checkErrorThree(err);

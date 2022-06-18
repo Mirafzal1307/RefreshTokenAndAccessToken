@@ -1,8 +1,10 @@
 import React from "react";
 import {  Redirect, Route } from "react-router-dom";
+import TokenService from "../services/token.service";
 
 const RestrictedRoute = (props) => {
-  const token = localStorage.getItem('accessToken');
+  const token = TokenService.getLocalAccessToken();
+  console.log(token);
   return <>{!token ? <Route {...props} /> : <Redirect to="/" />}</>;
 };
 
