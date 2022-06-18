@@ -5,15 +5,11 @@ class TokenService {
   }
 
   getLocalAccessToken() {
-    const admin = localStorage.getItem("accessToken");
-    return admin;
+    return localStorage.getItem("accessToken");;
   }
 
   updateLocalAccessToken(token) {
-    console.log(typeof token);
-    let admin = localStorage.getItem("accessToken");
-    admin = token;
-    localStorage.setItem("accessToken", admin);
+    localStorage.setItem("accessToken", token);
   }
 
   getAdmin() {
