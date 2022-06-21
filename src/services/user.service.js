@@ -3,6 +3,8 @@
 import request from "./api";
 
 // console.log(api);
+import request from "./api";
+
 class UserService {
   async getPublicContent() {
 
@@ -22,7 +24,7 @@ class UserService {
         method: 'GET',
       })
         .then(data => {
-           resolve(data);
+          resolve(data);
         }).catch(err => {
           console.log(err);
           reject(err);

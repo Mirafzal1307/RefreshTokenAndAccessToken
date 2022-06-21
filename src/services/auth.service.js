@@ -5,7 +5,7 @@ class AuthService {
   login(username, password) {
     console.log("login", username, password);
     return api
-      .post("/security/login", {
+      .post("/login", {
         username,
         password
       })
@@ -17,7 +17,29 @@ class AuthService {
         return response.data;
       });
   }
-
+  refreshToken(data) {
+    return api({
+      url: '/refresh',
+      method: 'post',
+      data: data
+    })
+  }
+  getrefreshToken(data) {
+    return api({
+      url: '/getrefresh',
+      method: 'post',
+      data: data
+    })
+  }
+  chekGetRefreshToken() {
+    return api({
+      url: '/check-toke',
+      method: 'get'
+    })
+  }
+  testGet() {
+    return api.get('/test')
+  }
   logout() {
     TokenService.removeAdmin();
   }

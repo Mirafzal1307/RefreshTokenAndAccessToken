@@ -8,6 +8,7 @@ import Home from './components/home';
 import Login from './components/login';
 import PrivateRoute from './auth/PrivateRoute';
 
+
 const Apps = () => {
     return (
         <Router>
@@ -31,12 +32,11 @@ const Apps = () => {
                     <Route exact component={<PrivateRoute />}>
                         <Route exact path="/login" element={<Login />} />
                     </Route> */}
-                    <Route  path="/login">
-                        <Login />
-                    </Route>
-                    <Route path="/home">
-                        <Home />
-                    </Route>
+                    <Route  component={Login}  path="/login"/>
+                  
+                  <PrivateRoute path="/home">
+                    <Home />
+                  </PrivateRoute>
 
 
                 </Switch>

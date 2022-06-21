@@ -1,23 +1,13 @@
+
 import React from 'react';
 import AuthService from '../services/auth.service';
-
-
-
+import {useHistory} from 'react-router-dom'
 function Login(props) {
+    const router = useHistory();
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [loading, setLoading] = React.useState(false);
     const [message, setMessage] = React.useState('');
-
-    // const required = (value) => {
-    //     if (!value) {
-    //         return (
-    //             <div className="alert alert-danger" role="alert">
-    //                 This field is required!
-    //             </div>
-    //         );
-    //     }
-    // };
     const onChangeUsername = (e) => {
         setUsername(e.target.value);
     }
@@ -37,28 +27,21 @@ function Login(props) {
         }
         else{
             AuthService.login(username, password).then(
-                () => {
-                    props.history.push('/');
+                (res) => {
+                    if (res.status === 200) {
+                        router.push('/home');
+                    }
+
                     // window.location.reload();
                 }
             ).catch(error => {
-                const resMessage =
-                    (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                    error.message ||
-                    setMessage(resMessage);
+                const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || setMessage(resMessage);
                 setLoading(false);
             })
-            }
-            
-            
-            return;
-            
-        
+        }
     }
     return (
-       
+
         <div className='col-md-12' >
             <div className='card card-container' >
 
@@ -87,9 +70,9 @@ function Login(props) {
                     </div>
                     <div className='form-group' >
                         <button
-                        className='btn btn-lg btn-primary btn-block'
-                        type='submit'
-                        disabled={loading}
+                            className='btn btn-lg btn-primary btn-block'
+                            type='submit'
+                            disabled={loading}
                         >
                             {loading && (
                                 <span className='spinner-border spinner-border-sm'></span>

@@ -5,7 +5,7 @@ class TokenService {
   }
 
   getLocalAccessToken() {
-    return localStorage.getItem("accessToken");;
+    return localStorage.getItem("accessToken");
   }
 
   updateLocalAccessToken(token) {
@@ -17,13 +17,14 @@ class TokenService {
   }
 
   setAdmin(admin) {
-    // console.log(JSON.stringify(admin));
     localStorage.setItem("accessToken", admin.accessToken);
     localStorage.setItem("refreshToken", admin.refreshToken);
   }
 
   removeAdmin() {
     localStorage.removeItem("admin");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
   }
 }
 
