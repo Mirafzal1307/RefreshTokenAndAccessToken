@@ -6,6 +6,7 @@ class TokenService {
 
   getLocalAccessToken() {
     return localStorage.getItem("accessToken");
+
   }
 
   updateLocalAccessToken(token) {
@@ -17,6 +18,7 @@ class TokenService {
   }
 
   setAdmin(admin) {
+    // console.log(admin);
     localStorage.setItem("accessToken", admin.accessToken);
     localStorage.setItem("refreshToken", admin.refreshToken);
   }

@@ -4,10 +4,10 @@ import {BrowserRouter} from "react-router-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {makeServer} from "./mock/server";
-if (process.env.NODE_ENV === 'development') {
-    makeServer({ environment: 'development' });
-}
+// import {makeServer} from "./mock/server";
+// if (process.env.NODE_ENV === 'development') {
+//     makeServer({ environment: 'development' });
+// }
 ReactDOM.render(
   <BrowserRouter>
     <App />

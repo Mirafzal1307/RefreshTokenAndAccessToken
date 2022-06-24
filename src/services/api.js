@@ -1,9 +1,9 @@
 import axios from "axios";
-import { checkErrorOne, checkErrorThree, checkErrorTwo } from "./checkError";
+import { checkErrorOne, checkErrorThree, CheckErrorThree, checkErrorTwo } from "./checkError";
 import TokenService from "./token.service";
 
 const request = axios.create({
-    baseURL: "http://localhost:8081",
+    baseURL: "http://139.162.11.245:2828",
     headers: {
         "Content-Type": "application/json",
     },
@@ -13,16 +13,8 @@ const request = axios.create({
 request.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('accessToken');
-        // console.log(token);
         if (token) {
-            // console.log(token);
-            // config.headers["Authorization"] = 'Bearer ' + token;  // for Spring Boot back-end
-            // axios.create({
-            //     headers: {
-            //         'accessToken': token
-            //     }
-            // })
-            config.headers["accessToken"] = token; // for Node.js Express back-end
+            config.headers["access_token"] = token; // for Node.js Express back-end
         }
         return config;
     },
@@ -31,16 +23,13 @@ request.interceptors.request.use(
     }
 );
 
-request.interceptors.response.use(
-    (res) => {
-        // console.log(res);
-        return res;
-    },
-    async (err) => {
-        // console.log("=====>>", err);
-        checkErrorOne(err);
-        checkErrorTwo(err);
-        checkErrorThree(err);
+request.interceptors.response.use(null ,
+     (err) => {
+        console.log(err.response);
+         const {data} = err.response; 
+         const {status} = err.response;
+        checkErrorOne(data.slice(1,7), status);
+        checkErrorTwo();
         return Promise.reject(err);
     }
 );

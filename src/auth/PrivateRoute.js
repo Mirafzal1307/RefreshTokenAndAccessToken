@@ -3,8 +3,11 @@ import { Redirect } from "react-router-dom";
 import TokenService from "../services/token.service";
 
 const PrivateRoute = ({  children }) => {
-  console.log(children , '-------------------------------children');
+  // console.log(children , '-------------------------------children');
   const token = TokenService.getLocalAccessToken();
+  // console.log(token, '-------------------------------token');
+  // debugger;
+  // console.log(token , '-------------------------------token');
   // console.log(token);
   if (token) {
     return children;

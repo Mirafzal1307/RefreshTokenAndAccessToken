@@ -28,6 +28,7 @@ function Login(props) {
         else{
             AuthService.login(username, password).then(
                 (res) => {
+                    // console.log(res.status);
                     if (res.status === 200) {
                         router.push('/home');
                     }

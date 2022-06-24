@@ -1,56 +1,70 @@
-import AuthService from './auth.service'
+import AuthService from './auth.service';
 import TokenService from "./token.service";
-export const checkErrorOne = (error) => {
-    console.log(error);
-    if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-    } else if (error.request) {
-        // The request was made but no response was received
-        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-    }
-}
-export const checkErrorTwo = (error) => {
-    const data  = {
-        refreshToken: localStorage.getItem('refreshToken')
-    }
-    if (error.response.status ===401) {
-        AuthService.getrefreshToken(data)
-            .then(res => {
-                TokenService.removeAdmin()
-                TokenService.setAdmin(res.data)
-                localStorage.setItem('ref', true)
-                AuthService.chekGetRefreshToken()
-                    .then(res => {
-                        console.log(res)
-                    })
-            })
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        console.log(error.response.data);
-        // console.log(error.response.status);
-        if (error.response.status) {
 
+const data = {
+    refreshToken: localStorage.getItem('refreshToken')
+}
+export const checkErrorOne = (message, status) => {
+    // const mess = JSON.stringify(message);
+    // const messageTwo = JSON.parse(mess);
+  
+    // console.log( typeof messageTwo);
+    console.log(status, "status");
+
+    console.log(message);
+    if (status === 403) {
+        switch (message) {
+            case "code=1":
+                // debugger;
+               
+                AuthService.getrefreshToken(data).then(
+                    (res) => {
+                        debugger;
+                        console.log(res, 'res');
+                        TokenService.removeAdmin();
+                        TokenService.setAdmin(res.data);
+                    }
+                )
+                break;
+            case "code=2":
+                // debugger;
+                window.location.href = "/login";
+                break;
+
+            // case "code=3":
+            //     // TokenService.removeAdmin();
+            //     return;
+            // default:
+            //     alert("wrong");
+            //     return;
         }
-        console.log(error.response.headers);
-    } else if (error.request) {
-        // The request was made but no response was received
-        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
     }
 }
-export const checkErrorThree = (error) => {
-    console.log(error);
-    if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-    } else if (error.request) {
-        // The request was made but no response was received
-        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-    }
+
+export const checkErrorTwo = async (message, status) => {
+    console.log(message, "message", status, "status");
+    // if (status === 403) {
+    // switch (message) {
+    //     case "code=3":
+    //         window.location.href = "/login";
+    //         switch(message){
+    //             case "code=2":
+    //                 const data = {
+    //                     refreshToken: localStorage.getItem('refreshToken')
+    //                 }
+    //                 AuthService.getrefreshToken(data).then(
+    //                     (res) => {
+    //                         console.log(res, 'res');
+    //                         TokenService.removeAdmin();
+    //                         TokenService.setAdmin(res.data);
+    //                     }
+    //                 )
+    //                 return;
+    //             }
+    //         return;
+    //     default:
+    //         alert("Something");
+    //         return;
+    // }
+    // }
 }
